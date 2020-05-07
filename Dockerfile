@@ -77,6 +77,7 @@ RUN     addgroup -S nginx \
         && curl -L "https://github.com/alibaba/tengine/archive/$TENGINE_VERSION.tar.gz" -o tengine.tar.gz \
         && mkdir -p /usr/src \
         && tar -zxC /usr/src -f tengine.tar.gz \
+        && rm tengine.tar.gz \
         && cd /usr/src/tengine-$TENGINE_VERSION \
         \
         # headers-more-nginx-module
@@ -87,7 +88,7 @@ RUN     addgroup -S nginx \
         # ngx_cache_purge
         && curl -L https://github.com/nginx-modules/ngx_cache_purge/archive/$NGX_CACHE_PURGE_VERSION.tar.gz  -o ngx_cache_purge.tar.gz \
         && tar -zxC /usr/src/tengine-$TENGINE_VERSION/modules -f ngx_cache_purge.tar.gz \
-        && rm tengine.tar.gz \
+        && rm ngx_cache_purge.tar.gz \
         \
 	    && ls -l /usr/src/tengine-$TENGINE_VERSION/modules \
 	    && ./configure $CONFIG --with-debug \
